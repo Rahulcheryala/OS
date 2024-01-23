@@ -1,0 +1,84 @@
+----------------------------------------------------------
+EXAMPLE-1:
+
+    echo 1 & echo 2
+    Output:
+    Minix 210010012: PID 253 created 
+    2
+    1
+    Minix 210010012: PID 253 exited 
+----------------------------------------------------------
+EXAMPLE-2:
+
+    echo 1 & echo 2 & echo 3
+    Output:
+    Minix 210010012: PID 254 created 
+    Minix 210010012: PID 255 created 
+    1
+    Minix 210010012: PID 254 exited 
+    3
+    2
+    Minix 210010012: PID 255 exited 
+    [1]	Done			echo1
+	[2]	Done			echo2
+	[3]	Done			echo3
+----------------------------------------------------------
+EXAMPLE-3:
+
+    echo 1 & echo 2 & echo 3 & echo 4
+    Output:
+    Minix 210010012: PID 256 created 
+    Minix 210010012: PID 257 created 
+    1
+    Minix 210010012: PID 256 exited 
+    Minix 210010012: PID 258 created
+    2
+    Minix 210010012: PID 257 exited 
+    4
+    3
+    Minix 210010012: PID 258 exited
+----------------------------------------------------------
+
+The echo commands are being to run in the background, which is indicated by the "&" symbol. When a command is run in the background, the system creates a new process ID (PID) for it, which is what you see in the "PID created" lines. 
+
+OBSERVATIONS:
+
+1. The numbers 1, 2, 3, and 4 are the outputs of the echo commands. They don't necessarily print in the order 1, 2, 3, 4 because the commands are running concurrently, not sequentially. The system doesn't wait for one command to finish before starting the next one, so the order in which they finish can vary.
+
+2. When a process finishes, you see a "PID exited" line. This means that the command has finished running and the system has closed the process.The "[1] Done echo1", "[2] Done echo2", etc. lines are messages from the shell indicating that the background processes have finished.
+
+3. The order of creation and exit of the processes in these examples follows the First In, First Out (FIFO) principle, which is similar to a queue. The first process that is created is the first one to exit.
+
+----------------------------------------------------------
+
+CODE: 
+#include <stdio.h>
+#include<unistd.h>
+int main()
+{
+    printf("Before forking\n");
+    int pid = fork();
+    if(pid == 0)
+    {
+        printf("Child process\n");
+    }
+    else
+    {
+        printf("Parent process\n");
+    }
+}
+
+
+Observations:
+1. On executing and running in linux, the following is printed:
+    Before forking
+    Parent Process
+    Child Process
+
+2. On executing and running this in minix the following is printed:
+    Before forking
+    Child Process
+    Parent Process
+
+In MINIX, it has been observed that the child process is executed before the parent process. However, in Linux, the opposite occurs where the parent process is executed prior to the child process.
+

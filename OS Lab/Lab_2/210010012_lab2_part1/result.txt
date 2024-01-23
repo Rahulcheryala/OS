@@ -1,0 +1,3 @@
+What is the minimum lines of C code with which you can achieve the above?
+
+28 
