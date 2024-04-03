@@ -171,7 +171,7 @@ int do_unlink(void)
   vp = advance(dirp, &stickycheck, fp);
 
   if (strcmp(vmp->m_mount_path, "/home") == 0)
-    printf("file deleted: %llu\n", vp->v_inode_nr);
+    printf("MINIX 210010012: file deleted: %llu\n", vp->v_inode_nr);
 
   if (vp != NULL)
   {

@@ -119,7 +119,7 @@ int common_open(char path[PATH_MAX], int oflags, mode_t omode)
 			struct vmnt *vmpPath;
 			vmpPath = find_vmnt(vp->v_fs_e);
 			if (strcmp(vmpPath->m_mount_path, "/home") == 0)
-				printf("MINIX 210010059: file created: %llu\n", vp->v_inode_nr);
+				printf("MINIX 210010012: file created: %llu\n", vp->v_inode_nr);
 		} /* We just created the file */
 		else if (r != EEXIST)
 		{ /* other error */

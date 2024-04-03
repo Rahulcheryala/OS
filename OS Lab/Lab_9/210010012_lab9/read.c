@@ -280,10 +280,10 @@ int read_write(struct fproc *rfp, int rw_flag, struct filp *f,
 	struct vmnt *vmp;
 	vmp = find_vmnt(vp->v_fs_e);
 	if (rw_flag == WRITING && strcmp(vmp->m_mount_path, "/home") == 0)
-		printf("MINIX 210010059: file write: %llu; nbytes = %zu; offset = %llu\n", vp->v_inode_nr, size, f->filp_pos);
+		printf("MINIX 210010012: file write: %llu; nbytes = %zu; offset = %llu\n", vp->v_inode_nr, size, f->filp_pos);
 
 	if (rw_flag == READING && strcmp(vmp->m_mount_path, "/home") == 0)
-		printf("MINIX 210010059: file read: %llu; nbytes = %zu; offset = %llu\n", vp->v_inode_nr, size, f->filp_pos);
+		printf("MINIX 210010012: file read: %llu; nbytes = %zu; offset = %llu\n", vp->v_inode_nr, size, f->filp_pos);
 
 	if (r == EPIPE && rw_flag == WRITING)
 	{

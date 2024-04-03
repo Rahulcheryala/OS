@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <unistd.h>
+
 void print_string(int position, char *str)
 {
     if (position < strlen(str))
@@ -14,9 +15,14 @@ void print_string(int position, char *str)
         // recursive child call
         if (pid == 0)
         {
+            // child process
             print_string(position + 1, str);
         }
-        wait(NULL);
+        else
+        {
+            // parent process
+            wait(NULL);
+        }
     }
 }
 int main(int argc, char *argv[])
